@@ -1,0 +1,58 @@
+<!--pages/profile/index.wxml-->
+<import src="../template/template"/>
+
+<view class="container">
+  <view class="profile-container">
+    <view class="portrait-card flex">
+      <view class="card-portrait">
+        <image class="fill radius50" wx:if="{{userProfile.portrait}}" src="{{userProfile.portrait}}"></image>
+      </view>
+      <view class="card-desc flex-item overhide">
+        <view class="title">{{userProfile.username}}</view>
+      </view>
+    </view>
+    <view class="placeholder-bar"></view>
+    <view class="select-item border-bottom flex">
+      <view class="select-item-title">个人状态：</view>
+      <view class="select-item-content">{{userProfile.playerStatus}}</view>
+    </view>
+    <view class="placeholder-bar"></view>
+    <view class="select-item border-bottom flex">
+      <view class="select-item-title">性别：</view>
+      <view class="select-item-content">{{userProfile.gender==1?'男':userProfile.gender==2?'女':'未知'}}</view>
+    </view>
+    <view class="select-item border-bottom flex">
+      <view class="select-item-title">生日：</view>
+      <view class="select-item-content">{{userProfile.birthday}}</view>
+    </view>
+    <view class="select-item border-bottom flex">
+      <view class="select-item-title">身高：</view>
+      <view class="select-item-content">{{userProfile.height || '--'}}cm</view>
+    </view>
+    <view class="select-item border-bottom flex">
+      <view class="select-item-title">体重：</view>
+      <view class="select-item-content">{{userProfile.weight || '--'}}kg</view>
+    </view>
+    <view class="select-item border-bottom flex">
+      <view class="select-item-title">地区：</view>
+      <view class="select-item-content">{{userProfile.area}}</view>
+    </view>
+    <view class="placeholder-bar"></view>
+    <view class="select-item border-bottom flex">
+      <view class="select-item-title">擅长位置：</view>
+      <view class="select-item-content">{{userProfile.position==1?'门将':userProfile.position==2?'后卫':userProfile.position==3?'中场':userProfile.position==4?'前锋':'未设置'}}</view>
+    </view>
+    <view class="placeholder-bar"></view>
+    <view class="select-item border-bottom flex">
+      <view class="select-item-title">个性签名：</view>
+      <view class="select-item-content">{{userProfile.signature || ''}}</view>
+    </view>
+    <view class="select-item border-bottom flex">
+      <view class="select-item-title">球员简介：</view>
+      <view class="select-item-content">{{userProfile.introduction || ''}}</view>
+    </view>
+  </view>
+  <view class="large-btn">
+    <button class="fill" type="warn" catchtap="tapLogout">退出登录/切换账号</button>
+  </view>
+</view>

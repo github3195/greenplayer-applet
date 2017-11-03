@@ -1,0 +1,44 @@
+/* pages/joinTeam/index.wxss */
+.apply-type-container {
+  padding: 0 20rpx;
+}
+.apply-title {
+  height: 80rpx;
+  line-height: 80rpx;
+  justify-content: space-between;
+}
+.apply-radio {
+  width: 50rpx;
+  height: 50rpx;
+  border: 2rpx solid #c4c4c4;
+}
+.apply-radio-select {
+  border: 2px solid #fff;
+}
+.tip-text {
+  font-size: 24rpx;
+  color: #646464;
+}
+.input-container {
+  justify-content: center;
+  margin: 20rpx 0;
+}
+.code-input {
+  margin: 0 20rpx;
+  flex: 0 0 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  border: 1rpx solid #c4c4c4;
+  border-radius: 5rpx;
+}
+.desc-title {
+  color: #646464;
+  padding-left: 20rpx;
+}
+.mark-input {
+  margin: 20rpx 60rpx;
+  width: auto;
+  height: 200rpx;
+  line-height: 40tpx;
+  border: 1rpx solid #c4c4c4;
+}

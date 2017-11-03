@@ -1,0 +1,9 @@
+/* pages/listpage/index.wxss */
+.team-list {
+  min-height: 100%;
+  background: #f0f0f0;
+  padding: 20rpx;
+}
+.team-list .team-card {
+  margin-bottom: 20rpx;
+}

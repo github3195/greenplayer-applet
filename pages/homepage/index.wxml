@@ -1,0 +1,212 @@
+<!--pages/homepage/index.wxml-->
+<import src="../template/template"/>
+
+<scroll-view class="container" scroll-y bindscroll="pageScroll">
+  <!--页面顶部，轮播和基本信息  -->
+  <view class="page-head rel">
+    <swiper class="background-swiper" autoplay interval="5000" wx:if="{{sliderBackgroundList.length > 0}}">
+      <swiper-item wx:for="{{sliderBackgroundList}}" wx:key="{{index}}">
+        <image class="fill" src="{{item}}"></image>
+      </swiper-item>
+    </swiper>
+    <view class="basic-info flex bg-white rel">
+      <view class="basic-portrait">
+        <image class="fill {{1==targetType?'radius50':''}}" wx:if="{{details.portrait}}" src="{{details.portrait}}"></image>
+      </view>
+      <view class="basic-desc flex-item overhide">
+        <view class="basic-title overhide">{{details.name}}</view>
+        <view class="basic-signature ellipsis">{{details.signature}}</view>
+      </view>
+    </view>
+  </view>
+  <!--页面主要容器  -->
+  <view class="page-container fill overhide" style="padding-bottom:{{showPageFoot?'80rpx':'0'}};">
+    <view class="fill rel">
+      <view class="nav2-list nav rel flex center bg-white">
+        <view wx:for="{{navList}}"
+              class="nav2-item flex-item {{index == currentNav ? 'active' : ''}}"
+              catchtap="changeNav"
+              data-index="{{index}}">{{item}}</view>
+      </view>
+      <view class="placeholder-bar"></view>
+      <view class="pages-group abs flex fill" style="transform:translateX(-{{translateX}}%);">
+        <!--第一屏  -->
+        <scroll-view class="pages fill" scroll-y="{{scrollY}}">
+          <template is="details" data="{{details}}"></template>
+        </scroll-view>
+        <!--第二屏  -->
+        <view class="pages fill overhide">
+          <scroll-view class="fill" scroll-y="{{scrollY}}">
+            <block wx:if="{{0 == targetType || 2 == targetType}}">
+              <view wx:for="{{memberList}}">
+                <template is="member-list" data="{{item}}"></template>
+              </view>
+            </block>
+            <block wx:if="{{1 == targetType}}">
+              <view class="sort-head" wx:for="{{[{col1:'效力球队',col2:'位置',col3:'号码',col4:'加入时间'}]}}">
+                <template is="col-4" data="{{item}}"></template>
+              </view>
+              <block wx:if="{{teamList.length>0}}">
+                <view wx:for="{{teamList}}">
+                  <navigator open-type="redirect" url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}">
+                    <template is="col-4" data="{{item}}"></template>
+                  </navigator>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="nodata">还没有加入任何球队~</view>
+              </block>
+            </block>
+          </scroll-view>
+        </view>
+        <!--第三屏  -->
+        <view class="pages fill overhide">
+          <block wx:if="{{0==targetType || 1==targetType}}">
+            <scroll-view class="fill" scroll-y="{{scrollY}}" bindscrolltolower="loadMoreMatch">
+              <block wx:if="{{matchHistoryList.length>0}}">
+                <view class="border-bottom" wx:for="{{matchHistoryList}}">
+                  <navigator url="../matchdetail/index?matchId={{item.matchId}}">
+                    <template is="against" data="{{item}}"></template>
+                  </navigator>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="nodata">暂无数据</view>
+              </block>
+            </scroll-view>
+          </block>
+          <block wx:elif="{{2==targetType}}">
+            <view class="data-container fill rel">
+              <view class="abs data-nav flex">
+                <view class="data-nav-item center flex-item {{currentDataNav==item.index?'bg-white color-main':''}}"
+                      catchtap="changeDataNav"
+                      wx:for="{{dataNavList}}"
+                      data-index="{{item.index}}">{{item.text}}</view>
+              </view>
+              <view class="data-page-group fill">
+                <!--赛程  -->
+                <view class="data-page fill rel" hidden="{{currentDataNav==0?false:true}}">
+                  <view class="data-head flex abs center border-bottom">
+                    <view class="flex-item"
+                          catchtap="changeTurn"
+                          data-range="-1"
+                          style="visibility:{{gameData.currentTurn > 0 ? 'visible' : 'hidden'}}">上一轮</view>
+                    <view class="flex-item">{{gameData.scheduleList[gameData.currentTurn].turnName}}</view>
+                    <view class="flex-item"
+                          catchtap="changeTurn"
+                          data-range="+1"
+                          style="visibility:{{gameData.currentTurn < gameData.scheduleList.length - 1 ? 'visible' : 'hidden'}}">下一轮</view>
+                  </view>
+                  <view class="data-body fill">
+                    <scroll-view class="fill" scroll-y="{{scrollY}}">
+                      <view wx:for="{{gameData.scheduleList[gameData.currentTurn].groupList}}">
+                        <view class="group-title" wx:if="{{gameData.scheduleList[gameData.currentTurn].groupList.length>1}}">{{item.groupName}}</view>
+                        <navigator class="border-bottom" wx:for="{{item.matchList}}" url="../matchdetail/index?matchId={{item.matchId}}">
+                          <template is="against" data="{{item}}"></template>
+                        </navigator>
+                      </view>
+                    </scroll-view>
+                  </view>
+                </view>
+                <!--积分榜  -->
+                <view class="data-page fill rel" hidden="{{currentDataNav==1?false:true}}">
+                  <view class="data-head sort-head abs" 
+                        wx:for="{{[{col1:'排名',col2:'队徽/队名',col3:'场次',col4:'胜',col5:'平',col6:'负',col7:'进/失',col8:'积分'}]}}">
+                    <template is="col-8" data="{{item}}"></template>
+                  </view>
+                  <view class="data-body fill">
+                    <scroll-view class="fill" scroll-y="{{scrollY}}">
+                      <block wx:if="{{gameData.scoreList.length>0}}">
+                        <view wx:for="{{gameData.scoreList}}">
+                          <view class="group-title" wx:if="{{item.groupName}}">{{item.groupName}}</view>
+                          <navigator url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}" wx:for="{{item.list}}">
+                            <template is="col-8" data="{{item}}"></template>
+                          </navigator>
+                        </view>
+                      </block>
+                      <block wx:else>
+                        <view class="nodata">暂无数据</view>
+                      </block>
+                    </scroll-view>
+                  </view>
+                </view>
+                <!--射手榜  -->
+                <view class="data-page fill rel" hidden="{{currentDataNav==2?false:true}}">
+                  <view class="data-head sort-head abs" 
+                        wx:for="{{[{col1:'排名',col2:'球员',col3:'所属球队',col4:'进球(点球)'}]}}">
+                    <template is="col-4-1" data="{{item}}"></template>
+                  </view>
+                  <view class="data-body fill">
+                    <scroll-view class="fill" scroll-y="{{scrollY}}">
+                      <block wx:if="{{gameData.shooterList.length>0}}">
+                        <navigator url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}" wx:for="{{gameData.shooterList}}">
+                          <template is="col-4-1" data="{{item}}"></template>
+                        </navigator>
+                      </block>
+                      <block wx:else>
+                        <view class="nodata">暂无数据</view>
+                      </block>
+                    </scroll-view>
+                  </view>
+                </view>
+                <!--助攻榜  -->
+                <view class="data-page fill rel" hidden="{{currentDataNav==3?false:true}}">
+                  <view class="data-head sort-head abs" 
+                        wx:for="{{[{col1:'排名',col2:'球员',col3:'所属球队',col4:'助攻'}]}}">
+                    <template is="col-4-1" data="{{item}}"></template>
+                  </view>
+                  <view class="data-body fill">
+                    <scroll-view class="fill" scroll-y="{{scrollY}}">
+                      <block wx:if="{{gameData.assistsList.length>0}}">
+                        <navigator url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}" wx:for="{{gameData.assistsList}}">
+                          <template is="col-4-1" data="{{item}}"></template>
+                        </navigator>
+                      </block>
+                      <block wx:else>
+                        <view class="nodata">暂无数据</view>
+                      </block>
+                    </scroll-view>
+                  </view>
+                </view>
+                <!--红黄牌榜  -->
+                <view class="data-page fill rel" hidden="{{currentDataNav==4?false:true}}">
+                  <view class="data-head sort-head abs" 
+                        wx:for="{{[{col1:'排名',col2:'球队(球员)',col3:'红/黄牌',col4:'处罚'}]}}">
+                    <template is="col-4-1" data="{{item}}"></template>
+                  </view>
+                  <view class="data-body fill">
+                    <scroll-view class="fill" scroll-y="{{scrollY}}">
+                      <block wx:if="{{gameData.punishList.length>0}}">
+                        <view wx:for="{{gameData.punishList}}">
+                          <template is="col-4-1" data="{{item}}"></template>
+                        </view>
+                      </block>
+                      <block wx:else>
+                        <view class="nodata">暂无数据</view>
+                      </block>
+                    </scroll-view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+        <!--第四屏  -->
+        <view class="pages fill overhide">
+          <scroll-view class="fill" scroll-y="{{scrollY}}">
+            <view class="nodata">体验完整功能，请下载“绿茵场”APP</view>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--底部的工具按钮，包括加入退出球队  -->
+  <view class="page-foot fix flex center" wx:if="{{showPageFoot}}">
+    <block wx:if="{{details.inTeam != 1}}">
+      <view class="join-team color-white flex-item" catchtap="tapJoinTeam">申请入队</view>
+    </block>
+    <block wx:else>
+      <view class="join-team color-white flex-item" catchtap="tapQuitTeam">退出球队</view>
+    </block>
+  </view>
+</scroll-view>

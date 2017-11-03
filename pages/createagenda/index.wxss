@@ -1,0 +1,21 @@
+/* pages/createagenda/index.wxss */
+.nav-container {
+  left: 0;
+  right: 0;
+  height: 70rpx;
+  z-index: 10;
+}
+.pages-group-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 80rpx;
+  padding-bottom: 90rpx;
+}
+.pages-group {
+  transition: all .2s;
+}
+.pages {
+  flex: 0 0 100%;
+  height: 100%;
+  background: #f0f0f0;
+}

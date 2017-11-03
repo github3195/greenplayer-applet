@@ -1,0 +1,12 @@
+<!--pages/convene/index.wxml-->
+<import src="../template/template"/>
+
+<view class="container">
+  <view>
+    <template is="against"></template>
+  </view>
+  <view>
+    <template></template>
+  </view>
+  <view></view>
+</view>

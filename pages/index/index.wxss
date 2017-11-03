@@ -1,0 +1,51 @@
+/**index.wxss**/
+
+.player-info {
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10rpx;
+  height: 120rpx;
+  box-shadow: 0 0 1rpx #c4c4c4;
+}
+.player-portrait {
+  left: 0;
+  top: -40rpx;
+  padding: 5rpx;
+  width: 140rpx;
+  height: 140rpx;
+  background: #fff;
+}
+.player-desc {
+  padding-left: 160rpx;
+}
+.signature {
+  font-size: 24rpx;
+  color: #646464;
+}
+.rel-list {
+  height: 150rpx;
+}
+.rel-icon {
+  width: 70rpx;
+  height: 90rpx;
+  padding-top: 20rpx;
+}
+.rel-text {
+  line-height: 60rpx;
+}
+.rel-share {
+  padding: 0;
+  font-size: 30rpx;
+}
+.rel-share::after {
+   border: 0; 
+}
+.title-text {
+  line-height: 80rpx;
+}
+.add-activity {
+  right: 20rpx;
+  bottom: 0;
+  line-height: 80rpx;
+  font-size: 80rpx;
+}

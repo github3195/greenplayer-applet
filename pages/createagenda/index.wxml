@@ -1,0 +1,87 @@
+<!--pages/createagenda/index.wxml-->
+<import src="../template/template"/>
+
+<view class="container">
+  <view class="nav-container fix">
+    <view class="nav2-list flex center bg-white">
+      <view wx:for="{{navList}}"
+            class="nav2-item flex-item {{index == currentNav ? 'active' : ''}}"
+            catchtap="changeNav"
+            data-index="{{index}}">{{item}}</view>
+    </view>
+  </view>
+  <view class="pages-group-container">
+    <view class="pages-group fill flex" style="{{'transform: translateX(-' + translateX + '%)'}}">
+      <scroll-view class="pages" scroll-y>
+        <view class="placeholder-bar"></view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">参赛球队：</view>
+          <view class="select-item-content more-icon">大天元</view>
+        </view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">比赛对象：</view>
+          <view class="select-item-content more-icon">小蘑菇</view>
+        </view>
+        <view class="placeholder-bar"></view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">时间：</view>
+          <view class="select-item-content flex">
+            <picker mode="date">选择日期</picker>
+            <picker mode="time">选择开始时间</picker>
+            <picker mode="time">选择结束时间</picker>
+          </view>
+        </view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">地点：</view>
+          <view class="select-item-content more-icon">哪里</view>
+        </view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">赛制：</view>
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{scaleList}}">
+            <view class="picker">选择赛制</view>
+          </picker>
+        </view>
+        <view class="placeholder-bar"></view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">比赛备注：</view>
+          <input class="select-item-content" placeholder="点击输入备注"></input>
+        </view>
+      </scroll-view>
+      <scroll-view class="pages" scroll-y>
+        <view class="placeholder-bar"></view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">活动球队：</view>
+          <view class="select-item-content more-icon">大天元</view>
+        </view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">时间：</view>
+          <view class="select-item-content flex">
+            <picker class="" mode="date">选择日期</picker>
+            <picker class="" mode="time">选择开始时间</picker>
+            <picker class="" mode="time">选择结束时间</picker>
+          </view>
+        </view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">地点：</view>
+          <input class="select-item-content" placeholder="点击输入地点"></input>
+        </view>
+        <view class="placeholder-bar"></view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">活动说明：</view>
+          <input class="select-item-content" placeholder="点击输入活动说明"></input>
+        </view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">人均预算：</view>
+          <input class="select-item-content" placeholder="点击输入人均预算"></input>
+        </view>
+        <view class="select-item border-bottom flex">
+          <view class="select-item-title">备注：</view>
+          <input class="select-item-content" placeholder="点击输入备注"></input>
+        </view>
+      </scroll-view>
+    </view>
+    <view wx:for="{{[[{flag:'creatematch', text: '确认'}]]}}">
+      <template is="bottom-button" data="{{item}}"></template>
+    </view>
+  </view>
+</view>

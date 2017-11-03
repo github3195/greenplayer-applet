@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/find/index",
+    "pages/logs/logs",
+    "pages/convene/index",
+    "pages/template/template",
+    "pages/matchdetail/index",
+    "pages/login/index",
+    "pages/homepage/index",
+    "pages/listpage/index",
+    "pages/search/index",
+    "pages/profile/index",
+    "pages/createagenda/index",
+    "pages/jointeam/index",
+    "pages/webview/index"
+  ],
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页",
+        "iconPath": "assets/img/footbar_icon_zuye_off@3x.png.png",
+        "selectedColor": "#32b847",
+        "selectedIconPath": "assets/img/footbar_icon_zuye_on@3x.png.png"
+      },
+      {
+        "pagePath": "pages/find/index",
+        "text": "发现",
+        "iconPath": "assets/img/footbar_icon_faxian_off@3x.png.png",
+        "selectedColor": "#32b847",
+        "selectedIconPath": "assets/img/footbar_icon_faxian_on@3x.png.png"
+      }
+    ]
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#32b847",
+    "navigationBarTitleText": "绿茵场",
+    "navigationBarTextStyle": "white"
+  },
+  "debug": false
+}

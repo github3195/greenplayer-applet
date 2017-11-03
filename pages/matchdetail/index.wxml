@@ -1,0 +1,95 @@
+<!--pages/matchDetail/index.wxml-->
+<import src="../template/template"/>
+
+<view class="container">
+  <view class='head-against' wx:for="{{againstInfo}}">
+    <template is="against" data="{{item}}"></template>
+  </view>
+  <view catchtap="navChange" class='center border-bottom'>
+    <view class="nav1-list flex center">
+      <view wx:for="{{nav.list}}"
+            wx:key="{{index}}"
+            class="flex-item nav1-item {{index==nav.current?'active':''}}"
+            data-index="{{index}}">{{item}}</view>
+      </view>
+    </view>
+  <view class="page-groups">
+    <!--详情  -->
+    <view wx:if="{{nav.current===0}}">
+      <template is="details" data="{{details}}"></template>
+    </view>
+    <!--名单  -->
+    <view wx:elif="{{nav.current===1}}">
+      <block wx:if="{{!isConvene}}">    <!--非召集展示名单  -->
+        <view class="tab-title flex center">
+          <view class="flex-item">{{formation.formationHome.formation}}</view>
+          <view class="flex-item">比赛阵型</view>
+          <view class="flex-item">{{formation.formationAway.formation}}</view>
+        </view>
+        <view wx:for="{{[formationList]}}">
+          <template is="tactics-board" data="{{item}}"></template>
+        </view>
+        <view class="tab-title center">首发名单</view>
+        <view wx:for="{{[nameList.firstList]}}">
+          <template is="name-list" data="{{item}}"></template>
+        </view>
+        <view class="tab-title center">替补或出场名单</view>
+        <view wx:for="{{[nameList.benchList]}}">
+          <template is="name-list" data="{{item}}"></template>
+        </view>
+      </block>
+      <block wx:else>    <!--召集展示详细资料  -->
+        <view class="">
+          <view class="no-feedback">未反馈<text class="color-main">{{unregistInfo.length}}</text>人</view>
+          <view class="feedback-container clearfix">
+            <view class="feedback-name-list left">
+              <view class="center">请假<text style="color:#fd5f46;">{{registInfo.leave.length}}</text>人</view>
+              <view class="">
+                 <view class="player-info flex overhide" wx:for="{{registInfo.leave}}">
+                  <image class="player-portrait radius50" src="{{item.portrait}}"></image>
+                  <view class="ellipsis">{{item.name}}</view>
+                </view> 
+              </view>
+            </view>
+            <view class="feedback-name-list left">
+              <view class="center">待定<text style="color:#59bfb9;">{{registInfo.undetermined.length}}</text>人</view>
+              <view class="">
+                <view class="player-info flex overhide" wx:for="{{registInfo.undetermined}}">
+                  <image class="player-portrait radius50" src="{{item.portrait}}"></image>
+                  <view class="ellipsis">{{item.name}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="feedback-name-list left">
+              <view class="center">报名<text style="color:#32b847;">{{registInfo.enroll.length}}</text>人</view>
+              <view class="">
+                <view class="player-info flex overhide" wx:for="{{registInfo.enroll}}">
+                  <image class="player-portrait radius50" src="{{item.portrait}}"></image>
+                  <view class="ellipsis">{{item.name}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="feedback fix flex bg-white">
+            <view class="feedback-btn center color-white" style="background:#fd5f46;" catchtap="tapFeedback" data-type="-1">请假</view>
+            <view class="feedback-btn center color-white" style="background:#59bfb9;" catchtap="tapFeedback" data-type="0">待定</view>
+            <view class="feedback-btn center color-white" style="background:#32b847;" catchtap="tapFeedback" data-type="100">报名</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <!--事件  -->
+    <view wx:elif="{{nav.current===2}}">
+      <view wx:for="{{eventList}}">
+        <template is="event-axis" data="{{item}}"></template>
+      </view>
+    </view>
+    <!--评选  -->
+    <view wx:elif="{{nav.current===3}}">
+      <view class="tab-title center">MVP评选<text>(截止{{mvpInfo.deadline}})</text></view>
+      <view wx:for="{{[playerList]}}">
+        <template is="name-list" data="{{item}}"></template>
+      </view>
+    </view>
+  </view>
+</view>

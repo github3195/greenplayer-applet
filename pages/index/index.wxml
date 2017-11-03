@@ -1,0 +1,62 @@
+<!--index.wxml-->
+<import src="../template/template"/>
+
+<view class="container">
+  <!--背景图轮播  -->
+  <swiper class="background-swiper" autoplay interval="5000">
+    <swiper-item wx:for="{{bgList}}" wx:key="{{index}}">
+      <image class="fill" src="{{item}}"></image>
+    </swiper-item>
+  </swiper>
+  <!--基本信息  -->
+  <view class="player-info flex">
+    <view class="flex rel">
+      <view class="player-portrait abs overhide radius50" data-url="../profile/index" catchtap="goUrlIfLogined">
+        <image class="fill radius50" src="{{portrait || 'https://share.greenplayer.cn/share/img/球员默认50.png'}}"></image>
+      </view>
+      <view class="player-desc">
+        <view>{{name || '未登录'}}</view>
+        <view class="signature">{{signature || ''}}</view>
+      </view>
+    </view>
+  </view>
+  <!--功能列表  -->
+  <swiper class="rel-list">
+    <swiper-item class="flex">
+      <navigator class="flex-item" wx:for="{{relList}}" wx:key="{{index}}" data-url="{{item.url}}" catchtap="goUrlIfLogined">
+        <view class="rel-icon block-center overhide">
+          <image class="fill" src="{{item.icon}}"></image>
+        </view>
+        <view class="rel-text center">{{item.text}}</view>
+      </navigator>
+      <button class="flex-item rel-share bg-white" open-type="share">
+        <view class="rel-icon block-center overhide">
+          <image class="fill" src="https://share.greenplayer.cn/share/img/match/sczd.png"></image>
+        </view>
+        <view class="rel-text center">邀请</view>
+      </button>
+    </swiper-item>
+  </swiper>
+  <!--占位条  -->
+  <view class="placeholder-bar"></view>
+  <!--日程  -->
+  <view class="">
+    <view class="rel">
+      <view class="title-text center border-bottom">最近活动</view>
+      <!-- <navigator data-url="../webview/index" catchtap="goUrlIfLogined">
+        <view class="add-activity abs color-main">+</view>
+      </navigator>   -->
+    </view>
+    <block wx:if="{{activitiesList.length > 0}}">
+      <view wx:for="{{activitiesList}}" wx:key="{{index}}" class="border-bottom">
+        <navigator url="../matchdetail/index?matchId={{item.matchId}}&activityType={{item.activityType}}&teamId={{item.selfTeamId}}"
+                   wx:if="{{1 == item.activityType || 5 == item.activityType}}">
+          <template is="against" data="{{item}}"></template>
+        </navigator>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="nodata">暂时没有活动~</view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,60 @@
+<!--pages/find/index.wxml-->
+<import src="../template/template"/>
+
+<view class="container">
+  <view class="page-fix fix flex center bg-white">
+    <view class="nav2-list flex flex-item ">
+      <view wx:for="{{navList}}"
+            class="nav2-item flex-item {{index == curNav ? 'active' : ''}}"
+            catchtap="changeNav"
+            data-index="{{index}}">{{item}}</view>
+    </view>
+    <view class="search-entry fullheight">
+      <navigator class="fill flex" url="../search/index">
+        <icon type="search" class="search-icon"></icon>
+      </navigator>
+    </view>
+  </view>
+  <view class="pages-group-container overhide">
+    <view class="pages-group fill flex" style="{{'transform: translateX(-' + translateX + '%)'}}">
+      <scroll-view class="pages" scroll-y bindscrolltolower="loadMoreGame">
+        <view class="border-bottom" wx:for="{{gameList}}">
+          <navigator url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}">
+            <template is="portrait-card" data="{{item}}"></template>
+          </navigator>
+        </view>
+      </scroll-view>
+      <scroll-view class="pages" scroll-y bindscrolltoupper="loadBeforeMatch" bindscrolltolower="loadFeatureMatch" upper-threshold="0">
+        <view class="border-bottom" wx:for="{{matchList}}">
+          <navigator url="../matchdetail/index?matchId={{item.matchId}}">
+            <template is="against" data="{{item}}"></template>
+          </navigator>
+        </view>
+      </scroll-view>
+      <view class="pages rel">
+        <view class="sort-head list-head abs bg-white" wx:for="{{[{col1:'排名',col2:'球队',col3:'胜',col4:'平',col5:'负',col6:'进/失',col7:'战斗力'}]}}">
+          <template is="col-7" data="{{item}}"></template>
+        </view>
+        <view class="list-container abs">
+          <scroll-view class="fill" scroll-y bindscrolltolower="loadMoreTeam">
+            <navigator wx:for="{{teamList}}" url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}">
+              <template is="col-7" data="{{item}}"></template>
+            </navigator>
+          </scroll-view>
+        </view>
+      </view>
+      <view class="pages rel">
+        <view class="sort-head list-head abs bg-white" wx:for="{{[{col1:'排名',col2:'球员',col3:'场次',col4:'进球',col5:'助攻',col6:'战斗力'}]}}">
+          <template is="col-6" data="{{item}}"></template>
+        </view>
+        <view class="list-container abs">
+          <scroll-view class="fill" scroll-y bindscrolltolower="loadMorePlayer">
+            <navigator wx:for="{{playerList}}" url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}">
+              <template is="col-6" data="{{item}}"></template>
+            </navigator>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

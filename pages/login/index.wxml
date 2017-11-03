@@ -1,0 +1,81 @@
+<!--pages/login/index.wxml-->
+<view class='container rel overhide'>
+  <view class="">
+    <!--登录  -->
+    <block wx:if="{{'login' == type}}">
+      <view class="input-container border-bottom flex">
+        <image class="input-icon" src="//share.greenplayer.cn/share/img/icon/phone.png"></image>
+        <input class="flex-item" placeholder="请输入手机号" bindinput="inputData" data-type="tel"></input>
+      </view>
+      <view class="input-container border-bottom flex">
+        <image class="input-icon" src="//share.greenplayer.cn/share/img/icon/password.png"></image>
+        <input class="flex-item" type="password" placeholder="请输入密码" bindinput="inputData" data-type="psd"></input>
+      </view>
+      <view class="large-btn" catchtap="tapLogin">
+        <button class="fill" type="primary" disabled="{{imperfect}}">登录</button>
+      </view>
+    </block>
+    <!--注册  -->
+    <block wx:elif="{{'signup' == type}}">
+      <view class="input-container border-bottom flex">
+        <image class="input-icon" src="//share.greenplayer.cn/share/img/icon/username.png"></image>
+        <input class="flex-item" placeholder="请输入球员名称" bindinput="inputData" data-type="un"></input>
+      </view>
+      <view class="input-container border-bottom flex">
+        <image class="input-icon" src="//share.greenplayer.cn/share/img/icon/phone.png"></image>
+        <input class="flex-item" placeholder="请输入手机号" bindinput="inputData"data-type="tel"></input>
+      </view>
+      <view class="input-container border-bottom flex">
+        <image class="input-icon" src="//share.greenplayer.cn/share/img/icon/password.png"></image>
+        <input class="flex-item" type="password" placeholder="请输入密码" bindinput="inputData" data-type="psd"></input>
+      </view>
+      <!-- <view class="input-container border-bottom flex">
+        <image class="input-icon" src="//share.greenplayer.cn/share/img/icon/password.png"></image>
+        <input class="flex-item" type="password" placeholder="请确认密码" bindinput="inputData" data-type="cpsd"></input>
+      </view> -->
+      <view class="input-container border-bottom flex">
+        <view class="input-icon"></view>
+        <input class="flex-item" placeholder="请输入验证码" bindinput="inputData" data-type="code"></input>
+        <button class="get-code" type="primary" catchtap="getCode" disabled="{{phoneImperfect}}">获取验证码</button>
+      </view>
+      <view class="large-btn" catchtap="tapSignup">
+        <button class="fill" type="primary" disabled="{{imperfect}}">注册</button>
+      </view>
+    </block>
+    <!--重置密码  -->
+    <block wx:if="{{'reset' == type}}">
+      <view class="input-container border-bottom flex">
+        <image class="input-icon" src="//share.greenplayer.cn/share/img/icon/phone.png"></image>
+        <input class="flex-item" placeholder="请输入手机号" bindinput="inputData" data-type="tel"></input>
+      </view>
+      <view class="input-container border-bottom flex">
+        <image class="input-icon" src="//share.greenplayer.cn/share/img/icon/password.png"></image>
+        <input class="flex-item" type="password" placeholder="请输入新密码" bindinput="inputData" data-type="psd"></input>
+      </view>
+      <!-- <view class="input-container border-bottom flex">
+        <image class="input-icon" src="//share.greenplayer.cn/share/img/icon/password.png"></image>
+        <input class="flex-item" type="password" placeholder="请确认新密码" bindinput="inputData" data-type="cpsd"></input>
+      </view> -->
+      <view class="input-container border-bottom flex">
+        <view class="input-icon"></view>
+        <input class="flex-item" placeholder="请输入验证码" bindinput="inputData" data-type="code"></input>
+        <button class="get-code" type="primary" catchtap="getCode" disabled="{{phoneImperfect}}">获取验证码</button>
+      </view>
+      <view class="large-btn" catchtap="tapReset">
+        <button class="fill" type="primary" disabled="{{imperfect}}">重置密码</button>
+      </view>
+    </block>
+    <view class="large-btn" catchtap="switchLogin">
+      <button class="fill">{{signupText}}</button>
+    </view>
+    <view class="center" catchtap="switchReset" wx:if="{{'reset' != type}}">忘记密码?</view>
+  </view>
+   <view class="authorization-container abs">
+    <view class="center">微信授权登录</view>
+    <view class="authorization flex">
+      <button class="author-btn" bindtap="authorizedLogin">
+        <image class="fill" src="http://share.greenplayer.cn/share/img/icon/wechat.png"></image>
+      </button>
+    </view>
+  </view> 
+</view>

@@ -1,0 +1,546 @@
+/**app.wxss**/
+/*这一部分是通用的类---------------------------------------------------------------------------------------------  */
+page {
+  height: 100%;
+}
+view, scroll-view {
+  box-sizing: border-box;
+}
+.container {
+  height: 100%; 
+  font-size: 26rpx;
+  color: #282828;
+}
+.placeholder-bar {
+  height: 10rpx;
+  background: #f0f0f0;
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex-col {
+  flex-direction: column;
+  justify-content: space-around;
+}
+.flex-row-rev {
+  flex-direction: row-reverse;
+}
+.flex-item {
+  flex: 1;
+}
+.radius50 {
+  border-radius: 50%;
+}
+.overhide {
+  overflow: hidden;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fill {
+  width: 100%;
+  height: 100%;
+}
+.rel {
+  position: relative;
+}
+.abs {
+  position: absolute;
+}
+.fix {
+  position: fixed;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix::after {
+  content: '';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.half {
+  width: 50%;
+  min-height: 1rpx;
+}
+.fullheight {
+  height: 100%;
+}
+.center {
+  text-align: center;
+}
+.txt-left {
+  text-align: left;
+}
+.block-center {
+  margin: 0 auto;
+}
+.border-bottom {
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.color-white {
+  color: white;
+}
+.color-main {
+  color: #32b847;
+}
+.bg-white {
+  background: white !important;
+}
+.bg-main {
+  background: #32b847;
+}
+
+/*这一部分是页面公用的类---------------------------------------------------------------------------------------------  */
+
+/*  */
+.background-swiper {
+  height: 400rpx;
+}
+/*导航条1，背景主色  */
+.nav1-list .nav1-item {
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #646464;
+}
+.nav1-list .nav1-item.active {
+  background: #32b847;
+  color: #fff;
+}
+/*导航条2，下边框主色  */
+.nav2-list {
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.nav2-item {
+  padding: 0 20rpx;
+  white-space: nowrap;
+}
+.nav2-item.active {
+  color: #32b847;
+  border-bottom: 2px solid #32b847;
+}
+/*  */
+.large-btn {
+  width: 100%;
+  height: 100rpx;
+  padding: 0 20rpx;
+  margin: 30rpx 0;
+}
+/*无数据提示  */
+.nodata {
+  text-align: center;
+  line-height: 100rpx;
+  color: #646464;
+}
+/*可编辑条目  */
+.select-item {
+  position: relative;
+  padding: 20rpx;
+  background: white;
+  justify-content: space-between;
+}
+.select-item-content {
+  text-align: right;
+  color: #646464;
+}
+.more-icon {
+  padding-right: 25rpx;
+}
+.more-icon::after {
+  content: '';
+  position: absolute;
+  right: 20rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 20rpx;
+  height: 20rpx;
+  border-top: 2rpx solid #c4c4c4;
+  border-right: 2rpx solid #c4c4c4;
+  transform: rotate(45deg);
+}
+
+/*这一部分是模板---------------------------------------------------------------------------------------------  */
+
+/*顶部的对阵信息  */
+.against-info {
+  padding: 15rpx 0;
+}
+.against-info .team-info {
+  width: 30%;
+}
+.against-info .team-portrait {
+  width: 90rpx;
+  height: 90rpx;
+}
+.head-against .against-info .team-portrait {
+  width: 130rpx;
+  height: 130rpx;
+}
+.against-info .team-name {
+  margin-top: 20rpx;
+}
+.against-info .match-info {
+  width: 40%;
+}
+.against-info .score, .against-info .register-type {
+  font-size: 32rpx;
+}
+.against-info .date, .against-info .court {
+  font-size: 24rpx;
+}
+.against-info .game-result {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  margin: auto;
+  width: 80rpx;
+  height: 80rpx;
+}
+.against-info .uniform {
+  top: 0;
+  bottom: 0;
+  width: 15rpx;
+  border: 1rpx solid #f0f0f0;
+  border-bottom: 0;
+}
+.against-info .uniform.home {
+  left: -40rpx
+}
+.against-info .uniform.away {
+  right: -40rpx
+}
+.against-info .uniform .uniform-color {
+  height: 33.333333%;
+}
+
+/*详情资料  */
+.details-item {
+  padding: 20rpx;
+  justify-content: space-between;
+}
+.details-name {
+  flex-shrink: 0;
+  margin-right: 30rpx;
+}
+.details-item .intro {
+  padding: 10rpx 20rpx 10rpx 40rpx;
+}
+.details-item .uniform-container {
+  height: 60rpx;
+  text-align: right;
+}
+.details-item .uniform-coat-color {
+  flex: 0 0 50rpx;
+  height: 50rpx;
+  margin-left: 10rpx;
+}
+.details-item .referee-content {
+  justify-content: space-around;
+}
+.details-item .referee-portrait {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/*战术板  */
+.tactics-board {
+  width: 100%;
+  height: 450rpx;
+  background-image: url(//share.greenplayer.cn/share/img/match/full-board-min.png);
+  background-size: 100% 100%;
+}
+.tactics-board .half:first-child .player-number {
+  background: #fff;
+}
+.tactics-board .player-number {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  background: yellow;
+}
+
+/*名单  */
+.name-list .player {
+  margin: 20rpx 0;
+  padding: 0 20rpx;
+}
+.name-list .player-portrait {
+  flex: 0 0 80rpx;
+  height: 80rpx;
+  border: 2rpx solid #32b847;
+  margin-right: 10rpx;
+}
+.name-list .player-number {
+  right: -5rpx;
+  bottom: -5rpx;
+  width: 40rpx;
+  height: 40rpx;
+  font-size: 24rpx;
+  background-image: url(//share.greenplayer.cn/share/img/match/content_polo-shirt_left_green@2x.png);
+  background-size: 100% 100%;
+}
+.name-list .player-name {
+  height: 40rpx;
+  line-height: 40rpx;
+  padding-right: 40rpx; 
+}
+.name-list .player-position {
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #646464;
+  font-size: 26rpx;
+}
+.name-list .position {
+  flex: 0 0 60rpx;
+  margin-right: 10rpx;
+}
+.name-list .vote-bar {
+  width: 100%;
+  height: 10rpx;
+  border: 1rpx solid #c4c4c4;
+  border-radius: 5rpx;
+}
+.name-list .vote-bar-inner {
+  height: 100%;
+  border-radius: 5rpx;
+}
+.name-list .vote-btn {
+  right: 20rpx;
+  top: 0;
+  width: 40rpx;
+  height: 40rpx;
+  background-image: url(//share.greenplayer.cn/share/img/icon/content_elect_green_nor@2x.png);
+  background-size: 100% 100%;
+}
+.name-list .vote-btn.disable {
+  background-image: url(//share.greenplayer.cn/share/img/icon/content_icon_dianzan_off@2x.png.jpg);
+}
+.name-list .split-line {
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4rpx;
+  background: #c4c4c4;
+}
+
+/*事件轴  */
+.event-axis {
+  margin: 20rpx 0;
+}
+.event-axis .event-list {
+  min-height: 50rpx;
+}
+.event-axis .event-line {
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  width: 4rpx;
+  background: #32b847;
+}
+.event-axis .event-end {
+  display: inline-block;
+  padding: 0 30rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #32b847;
+  color: #fff;
+  border-radius: 25rpx;
+}
+.event-axis .event-item {
+  margin: 20rpx 0;
+}
+.event-axis .event-time {
+  margin: auto;
+  left: 0;
+  right: 0;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #32b847;
+  color: #fff;
+}
+.event-axis .event-info {
+  padding: 0 50rpx;
+  width: 50%;
+  min-height: 50rpx;
+}
+.event-axis .event-info.left {
+  text-align: right;
+}
+.event-axis .event-icon {
+  flex: 0 0 40rpx;
+  height: 40rpx;
+  margin: 0 10rpx;
+}
+.event-axis .event-players {
+  border: 1rpx solid #f0f0f0;
+}
+.event-axis .event-player {
+  margin: 15rpx 0;
+}
+
+/*效力的球队  */
+.my-teams {
+  padding: 0 20rpx;
+}
+.my-teams .team-info, .my-teams .team-association, .my-teams .my-info {
+  padding: 20rpx 0;
+}
+.my-teams .team-association, .my-teams .my-info {
+  justify-content: space-between;
+}
+.my-teams .team-portrait {
+  flex: 0 0 100rpx;
+  height: 100rpx;
+  margin-right: 10rpx;
+}
+.my-teams .team-name {
+  font-size: 32rpx;
+  line-height: 60rpx;
+}
+.my-teams .team-desc {
+  color: #646464;
+  white-space: pre;
+  line-height: 40rpx;
+}
+
+/*添加按钮  */
+.add-btn {
+  right: 40rpx;
+  bottom: 80rpx;
+  z-index: 10;
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 90rpx;
+  font-size: 100rpx;
+  font-weight: bold;
+  background: rgba(50, 184, 71, 0.5);
+  box-shadow: 0 0 15px #32b847;
+}
+
+/*可折叠的  */
+.folding-title {
+  padding: 20rpx;
+  background: #f0f0f0;
+}
+.folding-load {
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+/*左边图标右边文字的卡片  */
+.portrait-card {
+  padding: 20rpx;
+}
+.card-portrait {
+  flex: 0 0 120rpx;
+  height: 120rpx;
+  margin-right: 10rpx;
+}
+.card-desc .title {
+  font-size: 30rpx;
+}
+.card-desc .desc {
+  color: #646464;
+  font-size: 24rpx;
+  line-height: 30rpx;
+}
+
+/*第三方主页的名单  */
+.member-list .title {
+  padding: 5rpx 20rpx;
+  background: #f0f0f0;
+  font-size: 30rpx;
+}
+.member-list .item {
+  padding: 20rpx;
+}
+.member-list .portrait {
+  flex: 0 0 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+.member-list .name {
+  font-size: 30rpx;
+  line-height: 50rpx;
+}
+.member-list .desc {
+  font-size: 24rpx;
+  line-height: 30rpx;
+}
+
+/*排名列表项  */
+.sort-head .sort-item {
+  height: 60rpx;
+}
+.sort-item {
+  height: 90rpx;
+}
+.flex-basis-col6 {
+  flex: 0 0 15%;
+}
+.flex-basis-col7 {
+  flex: 0 0 10%;
+}
+.sort-item-portrait {
+  flex: 0 0 60rpx;
+  height: 60rpx;
+  margin-right: 10rpx;
+}
+
+/*底部按钮  */
+.bottom-button-container {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  height: 90rpx;
+  padding: 10rpx 0;
+  border-top: 1rpx solid #f0f0f0;
+  justify-content: space-around;
+}
+.bottom-button {
+  margin: 0 20rpx;
+  height: 100%;
+  line-height: 70rpx;
+  border-radius: 5rpx;
+}
+.bottom-buttom-place {
+  height: 90rpx;
+}
+
+/*赛事状态文字标识  */
+.game-status-text {
+  display: inline-block;
+  margin-right: 10rpx;
+  padding: 5rpx 10rpx;
+  background: #32b847;
+  font-size: 24rpx;
+  border-radius: 5rpx;
+}
+
+/*天气图标  */
+.weather-icon {
+  flex: 0 0 60rpx;
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 10rpx;
+}

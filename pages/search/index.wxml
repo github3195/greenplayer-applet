@@ -1,0 +1,16 @@
+<!--pages/search/index.wxml-->
+<import src="../template/template"/>
+
+<view class="container">
+  <view class="search-container flex fix">
+    <input class="search-input flex-item" placeholder="输入关键字" bindinput="searchInput" bindconfirm="tapSearch"></input>
+    <icon class="search-icon" type="search" catchtap="tapSearch"></icon>
+  </view>
+  <view class="search-result">
+    <scroll-view class="fill" scroll-y>
+      <view class="border-bottom" wx:for="{{searchList}}" wx:if="{{item.count>0}}">
+        <template is="folding-item" data="{{item}}"></template>
+      </view>
+    </scroll-view>
+  </view>
+</view>

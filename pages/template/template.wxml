@@ -1,0 +1,640 @@
+<!--pages/template/template.wxml  -->
+<!--集中放置可复用的模板  -->
+<!--<template name=""></template>  -->
+
+<!--对阵信息的模板  -->
+<template name="against">
+  <view class="against-info center clearfix">
+    <view class="team-info left">
+      <view class="team-portrait rel block-center">
+        <view class="uniform abs home" wx:if="{{item.homeUniform.coats&&item.homeUniform.pants&&item.homeUniform.socks}}">
+          <view class="uniform-color border-bottom" style="background:{{item.homeUniform.coats}}"></view>
+          <view class="uniform-color border-bottom" style="background:{{item.homeUniform.pants}}"></view>
+          <view class="uniform-color border-bottom" style="background:{{item.homeUniform.socks}}"></view>
+        </view>
+        <image class="fill" src="{{item.homeTeamPortrait || 'https://share.greenplayer.cn/share/img/dt.png'}}"></image>
+      </view>
+      <view class="team-name ellipsis">{{item.homeTeamName || '未知'}}</view>
+    </view>
+    <view class="match-info left rel">
+      <view>
+        <view class="score ellipsis" wx:if="{{item.homeScore || item.awayScore}}">
+          <text style="font-size:24rpx;" wx:if="{{item.homePenaltyScore || item.awayPenaltyScore}}">({{item.homePenaltyScore || 0}})</text>
+          {{item.homeScore || 0}}:{{item.awayScore || 0}}
+          <text style="font-size:24rpx;" wx:if="{{item.homePenaltyScore || item.awayPenaltyScore}}">({{item.awayPenaltyScore || 0}})</text>
+        </view>
+        <view class="register-type" style="color:#32b847;" wx:elif="{{item.registerType == 1}}">已报名</view>
+        <view class="register-type" style="color:#59bfb9;" wx:elif="{{item.registerType == -1}}">已请假</view>
+        <view class="register-type" style="color:#59bfb9;" wx:elif="{{item.registerType == 0}}">待定</view>
+        <view class="register-type" style="color:#fd5f46;" wx:elif="{{item.registerType == -2}}">未反馈</view>
+        <view class="score ellipsis" wx:else>VS</view>
+      </view>
+      <view class="date ellipsis">{{item.matchTime || '未知'}}</view>
+      <view class="court ellipsis">{{item.courtName || '未知'}}</view>
+      <view class="game-result abs" wx:if="{{item.gameResult>-99}}">
+        <image class="fill"
+               src="//share.greenplayer.cn/share/img/icon/content_seal_sheng_nor@3x.png"
+               wx:if="{{1 == item.gameResult}}"></image>
+        <image class="fill"
+               src="//share.greenplayer.cn/share/img/icon/content_seal_ping_nor@3x.png"
+               wx:if="{{0 == item.gameResult}}"></image>
+        <image class="fill"
+               src="//share.greenplayer.cn/share/img/icon/content_seal_fu_nor@3x.png"
+               wx:if="{{-1 == item.gameResult}}"></image>
+      </view>
+    </view>
+    <view class="team-info left">
+      <view class="team-portrait rel block-center">
+        <view class="uniform abs away" wx:if="{{item.awayUniform.coats&&item.awayUniform.pants&&item.awayUniform.socks}}">
+          <view class="uniform-color border-bottom" style="background:{{item.awayUniform.coats}}"></view>
+          <view class="uniform-color border-bottom" style="background:{{item.awayUniform.pants}}"></view>
+          <view class="uniform-color border-bottom" style="background:{{item.awayUniform.socks}}"></view>
+        </view>
+        <image class="fill" src="{{item.awayTeamPortrait || 'https://share.greenplayer.cn/share/img/dt.png'}}"></image>
+      </view>
+      <view class="team-name ellipsis">{{item.awayTeamName || '未知'}}</view>
+    </view>
+  </view>
+</template>
+
+<!--详情资料的模板  -->
+<template name="details">
+  <view class="details">
+    <view class="details-item flex border-bottom" wx:if="{{details.foundingTime}}">
+      <view class="details-name">
+        <text>成立时间</text>
+      </view>
+      <view class="details-content">{{details.foundingTime}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.gameDuration}}">
+      <view class="details-name">
+        <text>赛事时间</text>
+      </view>
+      <view class="details-content">{{details.gameDuration}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.holdCity}}">
+      <view class="details-name">
+        <text>举办城市</text>
+      </view>
+      <view class="details-content">{{details.holdCity}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.holdCourt}}">
+      <view class="details-name">
+        <text>举办场地</text>
+      </view>
+      <view class="details-content">{{details.holdCourt}}</view>
+    </view>
+    <navigator class="details-item flex border-bottom" url="../homepage/index?targetType=1&targetId={{details.contacts.contactId}}" wx:if="{{details.contacts}}">
+      <view class="details-name">
+        <text>联系人</text>
+      </view>
+      <view class="details-content color-main">{{details.contacts.contactName}}</view>
+    </navigator>
+    <view class="details-item flex border-bottom" wx:if="{{details.enrollmentDeadline}}">
+      <view class="details-name">
+        <text>报名截止时间</text>
+      </view>
+      <view class="details-content">{{details.enrollmentDeadline}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.associationName}}">
+      <view class="details-name">
+        <text>主办/协办单位</text>
+      </view>
+      <view class="details-content">{{details.associationName}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.age}}">
+      <view class="details-name">
+        <text>年龄</text>
+      </view>
+      <view class="details-content">{{details.age}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.height}}">
+      <view class="details-name">
+        <text>身高</text>
+      </view>
+      <view class="details-content">{{details.height}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.weight}}">
+      <view class="details-name">
+        <text>体重</text>
+      </view>
+      <view class="details-content">{{details.weight}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.gameName}}">
+      <view class="details-name">
+        <text>赛事</text>
+      </view>
+      <view class="details-content">{{details.gameName}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.scaleName}}">
+      <view class="details-name">
+        <text>赛制</text>
+      </view>
+      <view class="details-content">{{details.scaleName}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.areaName}}">
+      <view class="details-name">
+        <text>城市</text>
+      </view>
+      <view class="details-content">{{details.areaName}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.area}}">
+      <view class="details-name">
+        <text>地区</text>
+      </view>
+      <view class="details-content">{{details.area}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.homeCourt}}">
+      <view class="details-name">
+        <text>主场</text>
+      </view>
+      <view class="details-content">{{details.homeCourt}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.position}}">
+      <view class="details-name">
+        <text>擅长位置</text>
+      </view>
+      <view class="details-content">{{details.position}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.homeUniform}}">
+      <view class="details-name">
+        <text>球衣</text>
+      </view>
+      <view class="details-content">{{details.homrUniform}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.combat}}">
+      <view class="details-name">
+        <text>战斗力</text>
+      </view>
+      <view class="details-content">{{details.combat}}</view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.weather}}">
+      <view class="details-name">
+        <text>天气</text>
+      </view>
+      <view class="flex">
+        <block wx:if="{{details.weather}}">
+          <template is="weather-icon" data="{{details}}"></template> 
+        </block>
+        <text class="">{{details.weather[0].lowTemp}}°C - {{details.weather[0].highTemp}}°C</text>
+      </view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.uniform}}">
+      <view class="details-name">
+        <text>队服</text>
+      </view>
+      <view class="flex-item overhide">
+        <view class="flex uniform-container">
+          <view class="flex-item ellipsis">{{details.uniform.homeName}}</view>
+          <view class="uniform-coat-color" style="background:{{details.uniform.homeColor}};"></view>
+        </view>
+        <view class="flex uniform-container">
+          <view class="flex-item ellipsis">{{details.uniform.awayName}}</view>
+          <view class="uniform-coat-color" style="background:{{details.uniform.awayColor}};"></view>
+        </view>
+      </view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.post}}">
+      <view class="details-name">
+        <text>海报</text>
+      </view>
+      <view class="flex-item overhide">
+        <view class="flex uniform-container">
+          <view class="flex-item ellipsis">{{details.post.homeName}}</view>
+          <image wx:if="{{details.post.posterA}}" class="uniform-coat-color" src="{{details.post.posterA}}"></image>
+        </view>
+        <view class="flex uniform-container">
+          <view class="flex-item ellipsis">{{details.post.awayName}}</view>
+          <image wx:if="{{details.post.posterA}}" class="uniform-coat-color" src="{{details.post.posterB}}"></image>
+        </view>
+      </view>
+    </view>
+    <view class="details-item border-bottom" wx:if="{{details.refereeList.length > 0}}">
+      <view class="details-name">
+        <text>裁判</text>
+      </view>
+      <view class="referee-content flex center">
+        <view wx:for="{{details.refereeList}}">
+          <image class="referee-portrait" src="{{item.portrait}}"></image>
+          <view class="">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="details-item flex border-bottom" wx:if="{{details.noteInfo}}">
+      <view class="details-name">
+        <text>备注</text>
+      </view>
+      <view class="details-content">{{details.noteInfo}}</view>
+    </view>
+    <view class="details-item" wx:if="{{details.intro}}">
+      <view class="details-name">
+        <text>简介</text>
+      </view>
+      <view class="intro">{{details.intro}}</view>
+    </view>
+  </view>
+</template>
+
+<!--战术板的模板  -->
+<template name="tactics-board">
+  <view class="tactics-board clearfix">
+    <view class="half left flex fullheight" wx:for="{{item}}" wx:for-item="list">
+      <view class="flex flex-col flex-item fullheight" wx:for="{{list}}">
+        <view class="player-number radius50 block-center center" wx:for="{{item}}">{{item.memberNumber}}</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--名单列表的模板  -->
+<template name="name-list">
+  <view class="name-list rel clearfix">
+    <view class="half left" wx:for="{{item}}" wx:for-item="list">
+      <view class="player flex rel" wx:for="{{list}}" wx:if="{{item.roleName}}">
+        <view class="player-portrait radius50 rel">
+          <image class="fill radius50" src="{{item.portrait}}"></image>
+          <view class="player-number abs color-white center">{{item.memberNumber}}</view>
+        </view>
+        <view class="flex-item overhide">
+          <view class="player-name flex overhide">
+            <view class="name ellipsis">{{item.name}}</view>
+            <view class="support-number" wx:if="{{item.supportNumber>=0}}">({{item.supportNumber}})</view>
+          </view>
+          <view class="player-position flex">
+            <view class="position">{{item.roleName}}</view>
+            <view class="vote-bar" wx:if="{{item.supportNumber>=0}}">
+              <view class="vote-bar-inner bg-main" style="width:{{item.supportRate}}%;"></view>
+            </view>
+          </view>
+        </view>
+        <block wx:if="{{item.supportNumber>=0 && 1 > 2}}">
+          <block wx:if="{{item.isVote == 0}}">
+            <view class="vote-btn abs" catchtap="voteForPlayer" data-playerId="{{item.id}}"></view>
+          </block>
+          <block wx:else>
+            <view class="vote-btn disable abs"></view>
+          </block>
+        </block>
+      </view>
+    </view>
+    <view class="split-line abs"></view>
+  </view>
+</template>
+
+<!--事件轴的模板  -->
+<template name="event-axis">
+  <view class="event-axis rel">
+    <view class="center"><text class="event-end">{{item.startTime}}</text></view>
+    <view class="event-list">
+      <view class="event-item clearfix rel" wx:for="{{item.list}}">
+        <view class="event-info rel left">
+          <view class="event-players" wx:if="{{item.isHomeTime}}">
+            <view class="event-player flex" wx:if="{{item.playerList.length>0}}">
+              <view class="flex-item" wx:for="{{item.playerList}}">{{item.playerInfo}}</view>
+              <template is="event-icon" data="{{item}}"></template>
+            </view>
+            <view class="event-player flex" wx:if="{{item.additional.length>0}}">
+              <view class="flex-item" wx:for="{{item.additional}}">{{item.playerInfo}}</view>
+              <template is="event-icon-additional" data="{{item}}"></template>
+            </view>
+          </view>
+        </view>
+        <view class="event-time abs radius50 center">{{item.happenTime}}</view>
+        <view class="event-info rel right">
+          <view class="event-players" wx:if="{{!item.isHomeTime}}">
+            <view class="event-player flex" wx:if="{{item.playerList.length>0}}">
+              <template is="event-icon" data="{{item}}"></template>
+              <view class="flex-item" wx:for="{{item.playerList}}">{{item.playerInfo}}</view>
+            </view>
+            <view class="event-player flex" wx:if="{{item.additional.length>0}}">
+              <template is="event-icon-additional" data="{{item}}"></template>
+              <view class="flex-item" wx:for="{{item.additional}}">{{item.playerInfo}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="center"><text class="event-end">{{item.endTime}}</text></view>
+    <view class="event-line abs"></view>
+  </view>
+</template>
+
+<!--效力球队的模板  -->
+<template name="my-teams">
+  <view class="my-teams bg-white">
+    <navigator url="../homepage/index?targetType=0&targetId={{item.teamId}}" class="team-info flex border-bottom">
+      <view class="team-portrait">
+        <image class="fill" src="{{item.portrait}}"></image>
+      </view>
+      <view class="overhide">
+        <view class="team-name ellipsis">{{item.teamName}}</view>
+        <view class="team-desc">战斗力：{{item.credit}}   成员数：{{item.totalMemberNumber}}   邀请码：{{item.teamPassword}}</view>
+      </view>
+    </navigator>
+    <view class="team-association flex border-bottom" wx:if="{{item.associationName}}">
+      <view>所属协会</view>
+      <view>{{item.associationName}}</view>
+      <view>注册号：{{item.registerCode}}</view>
+    </view>
+    <view class="my-info flex">
+      <view>我的信息</view>
+      <view>位置：{{item.position}}</view>
+      <view>球衣号：{{item.memberNumber}}号</view>
+    </view>
+  </view>
+</template>
+
+<!--固定的添加按钮  -->
+<template name="add-btn">
+  <view class="add-btn fix radius50 color-white center">+</view>
+</template>
+
+<!--可折叠的列表  -->
+<template name="folding-item">
+  <view class="folding-item">
+    <view class="folding-title border-bottom rel flex" bindtap="foldingToggleShow" data-index="{{item.index}}">
+      <view class="text">{{item.title}}</view>
+      <view class="icon" wx:if="{{item.count}}">({{item.count}})</view>
+    </view>
+    <view class="folding-content" hidden="{{!item.show}}">
+      <view class="border-bottom" wx:for="{{item.list}}" wx:key="{{index}}">
+        <navigator url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}">
+          <template is="portrait-card" data="{{item}}"></template>
+        </navigator>
+      </view>
+      <view wx:if="{{item.canLoadMore}}"
+            class="folding-load color-main center"
+            bindtap="foldingLoadMore"
+            data-page="{{item.pageId}}"
+            data-gamestype="{{item.gamesType}}"
+            data-placetype="{{item.placeType}}">加载更多数据</view>
+    </view>
+  </view>
+</template>
+
+<!--左边图标右边文字的卡片  -->
+<template name="portrait-card">
+  <view class="portrait-card flex">
+    <view class="card-portrait">
+      <image class="fill" src="{{item.portrait}}"></image>
+    </view>
+    <view class="card-desc flex-item overhide">
+      <view class="title"><template is="game-status-text" data="{{item}}"></template>{{item.title}}</view>
+      <view class="desc">{{item.desc1}}</view>
+      <view class="desc">{{item.desc2}}</view>
+    </view>
+  </view>
+</template>
+
+<!--带标题的名单列表，第三方主页使用  -->
+<template name="member-list">
+  <view class="member-list">
+    <view class="title" wx:if="{{item.title && item.list.length>0}}">{{item.title}}</view>
+    <view class="list">
+      <navigator open-type="redirect"
+                 url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}"
+                 class="item flex border-bottom"
+                 wx:for="{{item.list}}">
+        <view class="portrait">
+          <image class="fill {{1==item.targetType?'radius50':''}}" src="{{item.portrait}}"></image>
+        </view>
+        <view class="info flex-item overhide">
+          <view class="name ellipsis">{{item.name}}</view>
+          <view class="desc ellipsis">{{item.desc}}</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</template>
+
+<!--帖子文章动态项  -->
+<template name="article-card">
+  <view class="article-card">
+    <view></view>
+  </view>
+</template>
+
+<!--排名列表项  -->
+<template name="col-4">
+  <view class="sort-item overhide center flex border-bottom">
+    <block wx:if="{{item.col1}}">
+      <view class="flex-item ellipsis">{{item.col1}}</view>
+    </block>
+    <block wx:else>
+      <view class="flex-item flex overhide">
+        <view class="sort-item-portrait" style="margin-left:20rpx;">
+          <image class="fill" src="{{item.portrait}}"></image>
+        </view>
+        <view class="flex-item ellipsis txt-left">{{item.name}}</view>
+      </view>
+    </block>
+    <view class="ellipsis" style="flex: 0 0 12%;">{{item.col2}}</view>
+    <view class="ellipsis" style="flex: 0 0 12%;">{{item.col3}}</view>
+    <view class="ellipsis" style="flex: 0 0 30%;">{{item.col4}}</view>
+  </view>
+</template>
+<template name="col-4-1">
+  <view class="sort-item overhide center flex border-bottom">
+    <view class="ellipsis" style="flex: 0 0 10%;">{{item.col1}}</view>
+    <block wx:if="{{item.col2}}">
+      <view class="flex-item ellipsis">{{item.col2}}</view>
+    </block>
+    <block wx:else>
+      <view class="flex-item flex overhide">
+        <view class="sort-item-portrait" style="margin-left:20rpx;">
+          <image class="fill radius50" wx:if="{{item.portrait}}" src="{{item.portrait}}"></image>
+        </view>
+        <view class="flex-item ellipsis txt-left">{{item.name}}</view>
+      </view>
+    </block>
+    <view class="ellipsis" style="flex: 0 0 30%;">{{item.col3}}</view>
+    <view class="ellipsis" style="flex: 0 0 20%;">{{item.col4}}</view>
+  </view>
+  <block wx:if="{{item.list}}">     <!-- 如果有子列表 -->
+    <view class="border-bottom">
+      <navigator url="../homepage/index?targetType={{item.targetType}}&targetId={{item.targetId}}" wx:for="{{item.list}}">
+        <view class="sort-item overhide center flex">
+          <view class="ellipsis" style="flex: 0 0 10%;">{{item.col1}}</view>
+          <block wx:if="{{item.col2}}">
+            <view class="flex-item ellipsis">{{item.col2}}</view>
+          </block>
+          <block wx:else>
+            <view class="flex-item flex overhide">
+              <view class="sort-item-portrait" style="margin-left:20rpx;">
+                <image class="fill radius50" wx:if="{{item.portrait}}" src="{{item.portrait}}"></image>
+              </view>
+              <view class="flex-item ellipsis txt-left">{{item.name}}</view>
+            </view>
+          </block>
+          <view class="ellipsis" style="flex: 0 0 30%;">{{item.col3}}</view>
+          <view class="ellipsis" style="flex: 0 0 20%;">{{item.col4}}</view>
+        </view>
+      </navigator>
+    </view>
+  </block>
+</template>
+<template name="col-6">
+  <view class="sort-item overhide center flex border-bottom">
+    <view class="flex-basis-col6 ellipsis">{{item.col1}}</view>
+    <block wx:if="{{item.col2}}">
+      <view class="flex-item ellipsis">{{item.col2}}</view>
+    </block>
+    <block wx:else>
+      <view class="flex-item flex overhide">
+        <view class="sort-item-portrait">
+          <image class="fill radius50" src="{{item.portrait}}"></image>
+        </view>
+        <view class="flex-item ellipsis txt-left">{{item.name}}</view>
+      </view>
+    </block>
+    <view class="flex-basis-col6 ellipsis">{{item.col3}}</view>
+    <view class="flex-basis-col6 ellipsis">{{item.col4}}</view>
+    <view class="flex-basis-col6 ellipsis">{{item.col5}}</view>
+    <view class="flex-basis-col6 ellipsis">{{item.col6}}</view>
+  </view>
+</template>
+<template name="col-7">
+  <view class="sort-item overhide center flex border-bottom">
+    <view class="flex-basis-col7 ellipsis">{{item.col1}}</view>
+    <block wx:if="{{item.col2}}">
+      <view class="flex-item">{{item.col2}}</view>
+    </block>
+    <block wx:else>
+      <view class="flex-item flex overhide">
+        <view class="sort-item-portrait">
+          <image class="fill radius50" src="{{item.portrait}}"></image>
+        </view>
+        <view class="flex-item ellipsis txt-left">{{item.name}}</view>
+      </view>
+    </block>
+    <view class="flex-basis-col7 ellipsis">{{item.col3}}</view>
+    <view class="flex-basis-col7 ellipsis">{{item.col4}}</view>
+    <view class="flex-basis-col7 ellipsis">{{item.col5}}</view>
+    <view class="flex-basis-col6 ellipsis">{{item.col6}}</view>
+    <view class="flex-basis-col6 ellipsis">{{item.col7}}</view>
+  </view>
+</template>
+<template name="col-8">
+  <view class="sort-item overhide center flex border-bottom">
+    <view class="ellipsis" style="flex: 0 0 10%">{{item.col1}}</view>
+    <block wx:if="{{item.col2}}">
+      <view class="flex-item">{{item.col2}}</view>
+    </block>
+    <block wx:else>
+      <view class="flex-item flex overhide">
+        <view class="sort-item-portrait">
+          <image class="fill" wx:if="{{item.portrait}}" src="{{item.portrait}}"></image>
+        </view>
+        <view class="flex-item ellipsis txt-left">{{item.name}}</view>
+      </view>
+    </block>
+    <view class="ellipsis" style="flex: 0 0 8%">{{item.col3}}</view>
+    <view class="ellipsis" style="flex: 0 0 8%">{{item.col4}}</view>
+    <view class="ellipsis" style="flex: 0 0 8%">{{item.col5}}</view>
+    <view class="ellipsis" style="flex: 0 0 8%">{{item.col6}}</view>
+    <view class="ellipsis" style="flex: 0 0 15%">{{item.col7}}</view>
+    <view class="ellipsis" style="flex: 0 0 8%">{{item.col8}}</view>
+  </view>
+</template>
+
+<!--底部的按钮  -->
+<template name="bottom-button">
+  <view class="bottom-button-container fix flex bg-white">
+    <view class="bottom-button flex-item bg-main color-white center"
+          catchtap="tapBottomButton"
+          wx:for="{{item}}"
+          data-flag="{{item.flag}}">{{item.text}}</view>
+  </view>
+  <view class="bottom-buttom-place"></view>
+</template>
+
+<!--事件图标  -->
+<template name="event-icon">
+  <image wx:if="{{item.eventType==-1 || item.eventType==1}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/jq.png"></image>
+  <image wx:if="{{item.eventType==2 || item.eventType==3}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/ex_zg.png"></image>
+  <image wx:if="{{item.eventType==5 && item.isYellowToRed==1}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/yellowtored.png"></image>
+  <image wx:if="{{item.eventType==5 && item.isYellowToRed!=1}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/ex_rp.png"></image>
+  <image wx:if="{{item.eventType==6 && item.isYellowToRed==1}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/dotyellow.png"></image>
+  <image wx:if="{{item.eventType==6 && item.isYellowToRed!=1}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/ex_hp.png"></image>
+  <image wx:if="{{item.eventType==9}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/ex_sc.png"></image>
+  <image wx:if="{{item.eventType==10}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/ex_xc.png"></image>
+  <image wx:if="{{item.eventType==11 || item.eventType==17}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/dq.png"></image>
+  <image wx:if="{{item.eventType==12}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/wl.png"></image>
+</template>
+<template name="event-icon-additional">
+  <image wx:if="{{item.additionalEventType==2 || item.additionalEventType==3}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/ex_zg.png"></image>
+  <image wx:if="{{item.additionalEventType==10}}"
+         class="event-icon"
+         src="https://share.greenplayer.cn/share/img/match/ex_xc.png"></image>
+</template>
+
+<!--天气图标  -->
+<template name="weather-icon">
+  <image class="weather-icon" 
+         wx:if="{{0 == details.weather[0].weather}}"
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_sunny.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{1 == details.weather[0].weather || 2 == details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_cloudy.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{3 <= details.weather[0].weather && 12 >= details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_rain.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{13 <= details.weather[0].weather && 17 >= details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_snow.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{18 == details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_fog.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{19 == details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_rain.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{20 == details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_stand.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{21 <= details.weather[0].weather && 25 >= details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_rain.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{26 <= details.weather[0].weather && 28 >= details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_snow.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{29 == details.weather[0].weather || 30 == details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_stand.png"></image>
+  <image class="weather-icon" 
+         wx:elif="{{53 == details.weather[0].weather}}" 
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_haze.png"></image>
+  <image class="weather-icon" 
+         wx:else
+         src="https://share.greenplayer.cn/share/img/match/icon_weather_sunny.png"></image>
+</template>
+
+<!--赛事状态  -->
+<template name="game-status-text">
+  <text class="game-status-text color-white center" style="background:#c8c8c8" wx:if="{{item.gameStatus==30}}">已结束</text>
+  <text class="game-status-text color-white center" style="background:#5e81be" wx:elif="{{item.gameStatus>=10 && item.gameStatus<30}}">进行中</text>
+  <text class="game-status-text color-white center" style="background:#fd5f46" wx:elif="{{item.gameStatus==7 || item.gameStatus==5}}">筹备中</text>
+  <text class="game-status-text color-white center" style="background:#66d993" wx:elif="{{item.gameStatus==1}}">报名中</text>
+  <text class="game-status-text color-white center" style="background:#66d993" wx:elif="{{item.gameStatus==0}}">创建中</text>
+</template>

@@ -1,0 +1,44 @@
+<!--pages/joinTeam/index.wxml-->
+<import src="../template/template" />
+
+<view class="container">
+  <view class="">
+    <view class="apply-type-container border-bottom">
+      <view class="apply-title flex" catchtap="changeApplyType" data-type="1">
+        <view>邀请码入队</view>
+        <view class="apply-radio radius50"><view class="apply-radio-select radius50 fill {{applyType==1&&'bg-main'}}"></view></view>
+      </view>
+      <view hidden="{{applyType==1?false:'true'}}">
+        <view class="tip-text center">请输入四位邀请码</view>
+        <view class="input-container flex">
+          <input class="code-input center" type="number" bindinput="setInviteCode" data-codei="0" focus="{{focusInput[0]}}"></input>
+          <input class="code-input center" type="number" bindinput="setInviteCode" data-codei="1" focus="{{focusInput[1]}}"></input>
+          <input class="code-input center" type="number" bindinput="setInviteCode" data-codei="2" focus="{{focusInput[2]}}"></input>
+          <input class="code-input center" type="number" bindinput="setInviteCode" data-codei="3" focus="{{focusInput[3]}}"></input>
+        </view>
+      </view>
+    </view>
+    <view class="apply-type-container border-bottom">
+      <view class="apply-title flex" catchtap="changeApplyType" data-type="2">
+        <view>填写申请入队</view>
+        <view class="apply-radio radius50"><view class="apply-radio-select radius50 fill {{applyType==2&&'bg-main'}}"></view></view>
+      </view>
+      <view hidden="{{applyType==2?false:'true'}}">
+        <view class="desc-title">填写验证信息</view>
+        <textarea class="mark-input" bindinput="markInput" placeholder="点击输入验证信息"></textarea>
+      </view>
+    </view>
+    <!-- <view class="apply-type-container border-bottom">
+      <view class="apply-title flex" catchtap="changeApplyType" data-type="3">
+        <view>自助入队</view>
+        <view class="apply-radio radius50"><view class="apply-radio-select radius50 fill {{applyType==3&&'bg-main'}}"></view></view>
+      </view>
+      <view hidden="{{applyType==3?false:'true'}}">
+        <view></view>
+      </view>
+    </view> -->
+  </view>
+  <view wx:for="{{[[{flag:'jointeam', text: '确认提交'}]]}}">
+    <template is="bottom-button" data="{{item}}"></template>
+  </view>
+</view>

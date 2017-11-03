@@ -1,0 +1,42 @@
+<!--pages/listpage/index.wxml-->
+<!--统一归纳简单的列表页面，显示的是导入的模板  -->
+<import src="../template/template"/>
+
+<view class="container">
+
+<!--效力的球队  -->
+  <block wx:if="{{type=='teamlist'}}">
+    <view class="team-list rel">
+      <navigator url="../search/index?searchType=team">
+        <template is="add-btn"></template>
+      </navigator>
+      <view class="team-card" wx:for="{{teamList}}">
+        <template is="my-teams" data="{{item}}"></template>
+      </view>
+    </view>
+  </block>
+
+<!--日程活动  -->
+  <block wx:elif="{{type=='schedule'}}">
+    <scroll-view class="fullheight" scroll-y bindscrolltoupper="scheduleLoadForward" bindscrolltolower="scheduleLoadBackward"  upper-threshold="0">
+      <!-- <navigator url="../createagenda/index">
+        <template is="add-btn"></template>
+      </navigator> -->
+      <view class="border-bottom" wx:for="{{scheduleList}}">
+        <navigator url="../matchdetail/index?matchId={{item.matchId}}" wx:if="{{1 == item.activityType}}">
+          <template is="against" data="{{item}}"></template>
+        </navigator>
+      </view>
+    </scroll-view>
+  </block>
+
+<!--赛事列表  -->
+  <block wx:elif="{{type=='gamelist'}}">
+    <scroll-view class="fullheight" scroll-y>
+      <view class="border-bottom" wx:for="{{gameList}}">
+        <template is="folding-item" data="{{item}}"></template>
+      </view>
+    </scroll-view>
+  </block>
+
+</view>

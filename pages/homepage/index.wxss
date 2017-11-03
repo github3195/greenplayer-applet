@@ -1,0 +1,85 @@
+/* pages/homepage/index.wxss */
+
+/*------------------------------------------------------------------------------------------------------------------------------------------  */
+.basic-info {
+  height: 150rpx;
+  margin-top: -20rpx;
+  padding: 20rpx;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  z-index: 5;
+  box-shadow: 0 0 2px #a0a0a0;
+}
+.basic-portrait {
+  flex: 0 0 110rpx;
+  height: 110rpx;
+  margin-right: 20rpx;
+}
+.basic-title {
+  height: 80rpx;
+  line-height: 40rpx;
+  font-size: 32rpx;
+}
+.basic-signature {
+  line-height: 30rpx;
+  color: #646464;
+  font-size: 24rpx;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------  */
+.nav {
+  z-index: 2;
+}
+.pages-group {
+  left: 0;
+  top: 0;
+  z-index: 1;
+  padding-top: 88rpx;
+  transition: all .2s;
+}
+.pages {
+  flex: 0 0 100%;
+}
+
+.data-nav {
+  width: 100%;
+  height: 60rpx;
+  padding: 0 40rpx 10rpx;
+  justify-content: center;
+  background: #f0f0f0;
+}
+.data-nav-item {
+  height: 100%;
+  line-height: 50rpx;
+  border: 1rpx solid #c4c4c4;
+}
+.data-page-group {
+  padding-top: 60rpx;
+}
+.data-head {
+  height: 60rpx;
+  width: 100%;
+}
+.data-body {
+  padding-top: 60rpx;
+}
+.group-title {
+  padding: 5rpx 20rpx;
+  background: #f0f0f0;
+  font-size: 30rpx;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------  */
+.page-foot {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #72E481;
+}
+.join-team {
+  height: 100%;
+  background: #5e81be;
+}

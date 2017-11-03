@@ -1,0 +1,35 @@
+/* pages/login/index.wxss */
+.input-container {
+  margin: 30rpx;
+  padding-bottom: 10rpx;
+}
+.input-icon {
+  flex: 0 0 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+.get-code {
+  flex: 0 0 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-left: 20rpx;
+  font-size: 28rpx;
+}
+.authorization-container {
+  bottom: 20rpx;
+  left: 0;
+  right: 0;
+}
+.authorization {
+  margin: 20rpx 0;
+  justify-content: space-around;
+}
+.author-btn {
+  padding: 0;
+  width: 80rpx;
+  height: 80rpx;
+  background: #fff;
+}
+.author-btn::after {
+  border: 0;
+}
